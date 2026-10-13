@@ -13,7 +13,7 @@ CHORDS = {
 }
 
 
-def fret_symbol(fret):
+def fret_symbol(fret: int) -> str:
     """Turn one fret number into what the diagram shows."""
     if fret == -1:
         return "X"
@@ -25,14 +25,14 @@ def fret_symbol(fret):
 def titled(func):
     """Decorator: put the chord name and an underline above the diagram."""
     @functools.wraps(func)
-    def wrapper(name):
+    def wrapper(name: str) -> str:
         heading = "Chord: " + name
         return heading + "\n" + "-" * len(heading) + "\n" + func(name)
     return wrapper
 
 
 @titled
-def diagram(name):
+def diagram(name: str) -> str:
     """Return the six diagram lines for a chord, string 6 first."""
     lines = []
     for index, fret in enumerate(CHORDS[name]):
@@ -41,7 +41,7 @@ def diagram(name):
     return "\n".join(lines)
 
 
-def main():
+def main() -> None:
     name = input("Enter a chord name: ").strip()
     if name not in CHORDS:
         print("Chord not found.")
